@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS logs;
+
+USE logs;
+
+CREATE TABLE IF NOT EXISTS error_log (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    time DATETIME,
+    level VARCHAR(10),
+    path VARCHAR(512),
+    lineno INTEGER,
+    message MEDIUMTEXT -- up to 16MB
+);
