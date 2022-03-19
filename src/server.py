@@ -22,7 +22,7 @@ def on_new_client(conn, client_addr):
                 if res == 1:
                     logger.info(f'Server - Sending back {res}')
                 else:
-                    logger.error(f'Server - Error processing data')
+                    logger.error('Server - Error processing data')
 
                 sleep(random.randint(1, 2))
                 conn.sendall(bytes(str(res), encoding='utf8'))

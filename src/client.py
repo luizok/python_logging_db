@@ -7,9 +7,6 @@ from time import sleep
 from src.log import get_logger
 
 
-logger = get_logger(__name__)
-
-
 operations = ['GET', 'POST', 'PUT', 'DELETE']
 client_id = count(0, 1)
 
@@ -21,6 +18,7 @@ class Client:
 
     def connect(self, host, port):
 
+        logger = get_logger(__name__, Client.__name__)
         logger.info(f'Client {self.client_id} - Initializing connection')
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             try:
