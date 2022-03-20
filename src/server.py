@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 def on_new_client(conn, client_addr):
 
     try:
-        logger.info('connection from', client_addr)
+        logger.info(f'connection from {client_addr}')
         while True:
             data = conn.recv(1024)
             logger.info(f'Server - received {data}')
@@ -39,8 +39,12 @@ class Server:
 
     def start(self):
         logger.info('Server - Initializing server')
-        self._sock.bind((self._host, self._port))
-        self._sock.listen()
+        try:
+            self._sock.bind((self._host, self._port))
+            self._sock.listen()
+        except OSError as e:
+            logger.error(f'Server - {e}')
+            sys.exit(1)
 
         while True:
             logger.info('Server - Waiting for a connection')
@@ -49,7 +53,7 @@ class Server:
                 t = Thread(target=on_new_client, args=(conn, client_addr))
                 t.start()
             except Exception as e:
-                logger.error(f'Server - Error occured: {e}')
+                logger.error(f'Server - {e}')
             except KeyboardInterrupt:
                 logger.error('Server - closed')
                 sys.exit(1)

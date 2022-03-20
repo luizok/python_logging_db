@@ -1,0 +1,14 @@
+version: "2.2"
+
+services:
+  database:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootadmin
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=senha
+      - MYSQL_DATABASE=logs
+    volumes:
+      - ./error_log.sql:/docker-entrypoint-initdb.d/create.sql:ro
+    ports:
+      - "3306:3306"
