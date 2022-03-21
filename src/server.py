@@ -44,7 +44,7 @@ class Server:
             self._sock.listen()
         except OSError as e:
             logger.error(f'Server - {e}')
-            sys.exit(1)
+            return
 
         while True:
             logger.info('Server - Waiting for a connection')
@@ -56,4 +56,4 @@ class Server:
                 logger.error(f'Server - {e}')
             except KeyboardInterrupt:
                 logger.error('Server - closed')
-                sys.exit(1)
+                return
