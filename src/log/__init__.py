@@ -47,24 +47,15 @@ def init():
 
     handlers = hdlrs
 
+    logging.basicConfig(level=logging.INFO, handlers=hdlrs)
+
 
 def get_logger(*names):
 
-    global handlers, initialized, _called
+    global _called
 
     if not _called:
         init()
         _called = False
 
-    logger = logging.getLogger('.'.join(names))
-    if logger.name in initialized:
-        return logger
-
-    logger.setLevel(logging.INFO)
-
-    for handler in handlers:
-        logger.addHandler(handler)
-
-    initialized.add(logger.name)
-
-    return logger
+    return logging.getLogger('.'.join(names))

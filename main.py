@@ -24,6 +24,6 @@ if __name__ == '__main__':
     s = Thread(target=init_server, args=(host, port))
     s.start()
 
-    for i in range(1):
+    for i in range(4):
         c = Thread(target=init_client, args=(host, port))
         c.start()
